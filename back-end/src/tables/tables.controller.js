@@ -22,15 +22,25 @@ function hasValidFields(req, res, next) {
 
 function hasTableId(req, res, next) {
   const table = req.params.table_id;
-  console.log(table);
   if(table){
-      res.locals.reservation = table;
+      res.locals.table_id = table;
       next();
   } else {
       next({
-          status: 400,
+          status: 404,
           message: `missing table_id`,
       });
+  }
+}
+
+async function tableIdExists(req, res, next) {
+  const table_id = res.locals.table_id;
+  const table = await service.read(table_id);
+  if (table) {
+    res.locals.table = table;
+    next();
+  } else {
+    next({status: 404, message: `Table not found: ${table_id}`});
   }
 }
 
@@ -162,7 +172,7 @@ module.exports = {
       isValidNumber,
       asyncErrorBoundary(create)
   ],
-  read: [hasTableId, asyncErrorBoundary(read)],
+  read: [hasTableId, tableIdExists, asyncErrorBoundary(read)],
   list: [asyncErrorBoundary(list)],
   seat: [tableExists, isAvailable, hasCapacity, seat],
   occupy: [isOccupied, occupy]
