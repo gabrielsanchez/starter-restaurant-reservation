@@ -96,7 +96,8 @@ function isValidDate(req, res, next){
 
 function isTime(req, res, next){
   const { data = {} } = req.body;
-  if (/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/.test(data['reservation_time'])){
+  // TODO: Change this...
+  if (/^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/.test(data['reservation_time']) || /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/.test(data['reservation_time']) ){
     return next();
   }
   next({ status: 400, message: `Invalid reservation_time` });
