@@ -7,7 +7,6 @@ function ReservationSeat() {
   const { reservation_id } = useParams();
 
   const [reservation, setReservation] = useState({});
-  const [reservationError, setReservationError] = useState(null);
   const [tables, setTables] = useState([]);
   const [tableId, setTableId] = useState("");
 
@@ -16,10 +15,8 @@ function ReservationSeat() {
   }, []);
 
   useEffect(() => {
-      setReservationError(null);
       readReservation(reservation_id)
-      .then(setReservation)
-      .catch(setReservationError);
+      .then(setReservation);
    }, [reservation_id]);
 
   function changeHandler({ target: { value } }) {

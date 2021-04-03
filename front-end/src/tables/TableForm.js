@@ -5,7 +5,6 @@ import { createTable } from "../utils/api";
 import TableErrors from "./TableError";
 import { today } from "../utils/date-time";
 
-
 function TableForm(){
     const history = useHistory();
     const initialState = {
@@ -30,24 +29,10 @@ function TableForm(){
 
     const [error, setError] = useState(null);
 
-
-    function validate(table){
-        const errors = []
-        return errors;
-    }
-
-
     function submitHandler(event){
         event.preventDefault();
         event.stopPropagation();
         setError(null);
-
-        //const tableErrors = validate(table);
-
-        //console.log(tableErrors);
-        //if (tableErrors.length) {
-        //  return setError(tableErrors);
-        //}
 
         createTable(table)
            .then(() => {

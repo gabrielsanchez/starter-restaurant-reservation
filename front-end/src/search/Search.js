@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { cancelReservation, listReservations } from "../utils/api";
+import {listReservations } from "../utils/api";
 import Reservations from "../dashboard/Reservations";
 
 function Search() {

@@ -25,7 +25,7 @@ function Reservations({onCancel, reservations = [] }) {
           <div className="col-sm-1">{reservation.reservation_time}</div>
           <div className="col-sm-1">{reservation.people}</div>
           <div className="col-sm-1" data-reservation-id-status={reservation.reservation_id}>{reservation.status}</div>
-          {reservation.status == "booked" ? (
+          {reservation.status === "booked" ? (
               <div className="col-sm-1">
                 <Link className="btn" to={`/reservations/${reservation.reservation_id}/seat`}>seat</Link>
                 <Link className="btn" to={`/reservations/${reservation.reservation_id}/edit`}>edit</Link>

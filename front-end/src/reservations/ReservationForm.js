@@ -15,7 +15,6 @@ function ReservationForm(){
         "people": 0
     }
 
-    // Similar to Form index.js from flashcards project:
     const [reservation, setReservation] = useState(initialState);
     function changeHandler({ target: { name, value } }) {
       setReservation((prevState) => ({
