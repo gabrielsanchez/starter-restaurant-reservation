@@ -8,7 +8,6 @@ function Dashboard({ date }) {
   const [reservations, setReservations] = useState([]);
   const [reservationsError, setReservationsError] = useState(null);
   const [tables, setTables] = useState([]);
-  const [tablesError, setTablesError] = useState(null);
 
   useEffect(loadDashboard, [date]);
 
@@ -19,7 +18,7 @@ function Dashboard({ date }) {
       .then(setReservations)
       .catch(setReservationsError);
 
-    listTables().then(setTables).catch(setTablesError);
+    listTables().then(setTables)
     return () => abortController.abort();
   }
 
@@ -32,7 +31,6 @@ function Dashboard({ date }) {
   function onFinish(table_id, reservation_id) {
     finishTable(table_id, reservation_id)
       .then(loadDashboard)
-      .catch(setTablesError);
   }
 
   return (

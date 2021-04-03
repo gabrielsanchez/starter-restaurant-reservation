@@ -1,5 +1,4 @@
 import React from "react";
-import {finishTable} from "../utils/api";
 
 function Tables({onFinish, tables = [] }) {
 
