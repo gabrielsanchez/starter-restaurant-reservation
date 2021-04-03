@@ -1,6 +1,19 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-function Reservations({ reservations = [] }) {
+function Reservations({onCancel, reservations = [] }) {
+  function cancelHandler({
+      target: { dataset: { reservationIdCancel } } = {},
+  }) {
+      if (
+        reservationIdCancel &&
+        window.confirm(
+          "Do you want to cancel this reservation? This cannot be undone."
+        )
+      ) {
+        onCancel(reservationIdCancel);
+      }
+  }
   const rows = reservations.length ? (
     reservations.map((reservation) => {
       return (
@@ -12,7 +25,14 @@ function Reservations({ reservations = [] }) {
           <div className="col-sm-1">{reservation.reservation_time}</div>
           <div className="col-sm-1">{reservation.people}</div>
           <div className="col-sm-1" data-reservation-id-status={reservation.reservation_id}>{reservation.status}</div>
-          {reservation.status == "booked" ? (<div className="col-sm-1"><a className="btn" href={`/reservations/${reservation.reservation_id}/seat`}>seat</a></div>) : ( "" )}
+          {reservation.status == "booked" ? (
+              <div className="col-sm-1">
+                <Link className="btn" to={`/reservations/${reservation.reservation_id}/seat`}>seat</Link>
+                <Link className="btn" to={`/reservations/${reservation.reservation_id}/edit`}>edit</Link>
+                <Link className="btn" to={`/reservations/${reservation.reservation_id}/cancel`}>cancel</Link>
+                <button type="button" className="btn cancel" data-reservation-id-cancel={reservation.reservation_id} onClick={cancelHandler}>Cancel</button>
+              </div>
+          ) : ( "" )}
         </div>
       );
     })
