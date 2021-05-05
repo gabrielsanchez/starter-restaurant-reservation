@@ -20,7 +20,7 @@ describe("US-08 - Change an existing reservation - E2E", () => {
 
   beforeAll(async () => {
     await fsPromises.mkdir("./.screenshots", { recursive: true });
-    browser = await puppeteer.launch();
+    browser = await puppeteer.launch({headless: false, sloMo: 250});
   });
 
   beforeEach(async () => {
@@ -97,7 +97,7 @@ describe("US-08 - Change an existing reservation - E2E", () => {
           return response.url().includes("/reservations?date=");
         });
 
-        await page.waitForTimeout(500);
+        await page.waitForTimeout(1500);
 
         expect(await page.$(cancelButtonSelector)).toBeNull();
       });

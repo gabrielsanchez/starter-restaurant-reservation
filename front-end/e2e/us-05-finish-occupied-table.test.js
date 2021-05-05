@@ -18,7 +18,7 @@ describe("US-05 - Finish an occupied table - E2E", () => {
 
   beforeAll(async () => {
     await fsPromises.mkdir("./.screenshots", { recursive: true });
-    browser = await puppeteer.launch();
+    browser = await puppeteer.launch({headless: false, sloMo: 250});
   });
 
   afterAll(async () => {

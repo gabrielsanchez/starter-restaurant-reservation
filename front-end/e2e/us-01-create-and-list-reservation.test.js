@@ -15,7 +15,7 @@ describe("US-01 - Create and list reservations - E2E", () => {
 
   beforeAll(async () => {
     await fsPromises.mkdir("./.screenshots", { recursive: true });
-    browser = await puppeteer.launch();
+    browser = await puppeteer.launch({headless: false, sloMo: 250});
   });
 
   beforeEach(async () => {
